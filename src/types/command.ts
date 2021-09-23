@@ -18,10 +18,6 @@ export type Command = {
 	aliases?: string[],
 	disabled?: boolean,
 
-	// Argumentos
-	args?: boolean,
-	usage?: string,
-
 	// Inhibidores
 	guildOnly?: boolean,
 	nsfw?: boolean,
@@ -35,12 +31,19 @@ export type Command = {
 	'manageMessages'|
 	'manageEmojis'|
 	'manageAKA',
-
+	
 	// Run
 	run: Run
 }
 
 // Posibles ideas para un futuro
 /*
+
+	// Argumentos
+	args?: {
+		args: boolean,
+		split: string,
+		usage: string
+	},
 cooldown?: number,
 */

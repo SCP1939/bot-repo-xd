@@ -1,4 +1,4 @@
-import { Message } from 'discord.js';
+import { Message, MessageMentions } from 'discord.js';
 import extClient from '../../client';
 import { Command } from '../../types';
 
@@ -13,6 +13,8 @@ export const command: Command = {
     dev: true,
 
 	run: async (client: extClient, msg: Message, args: string[]) => {
-        return 'ok'
+        return msg.reply({
+			content: 'asd'
+		})
     }
 }
