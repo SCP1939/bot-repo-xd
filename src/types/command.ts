@@ -1,7 +1,7 @@
 /* Command Types */
 
 // Libs
-import { Interaction, Message } from 'discord.js';
+import { Message } from 'discord.js';
 import extClient from '../client';
 
 // Types
@@ -32,6 +32,18 @@ export type Command = {
 	'manageEmojis'|
 	'manageAKA',
 	
+	// Argumentos
+	usage?: string,
+	example?: string[],
+	args?: {
+		required?: number,
+		requiredMention?: boolean
+	},
+	
+	// Flags? nose como llamarlo xd
+	indev?: boolean,
+
+
 	// Run
 	run: Run
 }
@@ -39,11 +51,5 @@ export type Command = {
 // Posibles ideas para un futuro
 /*
 
-	// Argumentos
-	args?: {
-		args: boolean,
-		split: string,
-		usage: string
-	},
 cooldown?: number,
 */

@@ -1,17 +1,22 @@
 import { Client, Collection, Intents, Message } from 'discord.js';
 import { readdirSync } from 'fs';
+import { connect, Mongoose } from 'mongoose';
 import { join } from 'path';
 
 import { config } from '../botconfig';
 import { Command, Event } from '../types';
 
+
 /***********************/
+
 
 /*const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });*/
 
+
 /***********************/
+
 
 // Extended Client
 export default class extClient extends Client {
@@ -28,7 +33,17 @@ export default class extClient extends Client {
 		try {
 			this.login(config.token);
 
+			// Conexión con Mongo DB
+			if (typeof config.mongo == 'string') {
+				connect(config.mongo, {
+					//@ts-ignore
+					useUnifiedTopology: true,
+					useFindAndModify: true,
+					useNewUrlParser: true
+				})
+			}
 
+			
 			/***********************/
 
 
