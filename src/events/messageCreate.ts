@@ -25,7 +25,7 @@ export const event: Event = {
 		const args = msg.content.slice(config.prefix.length).trim().split(/ +/g); // Dividir argumentos
 		const cmd = args.shift()?.toLowerCase(); // Obtener comando
 		const command = client.commands.get(cmd) || client.aliases.get(cmd);
-		const data = client.commands.get(cmd); // Obtener datos del comando
+		const data = command; // Obtener datos del comando
 
 
         /***********************/
@@ -48,9 +48,9 @@ export const event: Event = {
 		}
 
 		// El autor no es el desarrollador
-		if (data.dev && msg.author.id !== config.dev) {
+		if (data.dev !== undefined && data.dev && msg.author.id !== config.dev) {
 			return msg.reply({
-				content: '🤖 **| No eres mi desarrollador**',
+				content: '🤖**・No eres mi desarrollador**',
 				allowedMentions: { repliedUser: false }
 			});
 		}
@@ -58,7 +58,7 @@ export const event: Event = {
 		// El comando está desactivado
 		if (data.disabled) {
 			return msg.reply({
-				content: '🛌 **| Este comando está desactivado**',
+				content: '🛌**・Este comando está desactivado**',
 				allowedMentions: { repliedUser: false }
 			});
 		}
@@ -69,7 +69,7 @@ export const event: Event = {
 			msg.channel.type == 'DM'
 		) {
 			return msg.reply({
-				content: '🌎 **| Este comando está dedicado para servers**',
+				content: '🌎**・Este comando está dedicado para servers**',
 				allowedMentions: { repliedUser: false }
 			});
 		}
@@ -79,7 +79,7 @@ export const event: Event = {
 		if (data.nsfw && !msg.channel.nsfw) {
 			return msg.reply({
 				content:
-					'🔥 **| Este comando solo puede ejecutarse en canales NSFW**',
+					'🔥**・Este comando solo puede ejecutarse en canales NSFW**',
 				allowedMentions: { repliedUser: false }
 			});
 		}
@@ -100,7 +100,7 @@ export const event: Event = {
 				(data.perms == 'owner' && msg.guild!.ownerId == msg.author.id)
 			) {
 				return msg.reply({
-					content: `😐 **| Te falta el permiso** \`${data.perms}\` **para poder ejecutar el comando**`,
+					content: `😐**・Te falta el permiso** \`${data.perms}\` **para poder ejecutar el comando**`,
 					allowedMentions: { repliedUser: false }
 				});
 			}
@@ -119,7 +119,7 @@ export const event: Event = {
 		if (data.args !== undefined) {
             let argsAnswer = `💠 | **Faltan argumentos**\n> Uso correcto:\n\`\`\`\n${
                 data.usage
-            }\`\`\`\n> Ejemplo: \n\`\`\`\n${
+            }\`\`\`\n> Ejemplo: \n\`\`\`\n${ //@ts-ignore
                 data.example.join().replaceAll(',', '\n')
             }\`\`\``;
             console.log(args);
@@ -129,9 +129,7 @@ export const event: Event = {
             // Ambos requeridos
             if (data.args.required !== undefined && data.args.requiredMention == true){
                 args.shift();
-                console.log(args)
-
-                console.log('los dos requeridos')
+				
                 if (msg.mentions.users.first() == undefined) return msg.reply({
                     content: argsAnswer,
                     allowedMentions: { repliedUser: false }
@@ -143,11 +141,12 @@ export const event: Event = {
                 
             }
             // Mención no requerida y falta de argumentos
+			//@ts-ignore
             if (data.args.requiredMention !== true && msg.mentions.users.first()?.toString() == args[0] && data.args.required > 0) {
-                console.log('tercera opción')
-                args.shift()
-                console.log(args)
 
+                args.shift();
+
+				//@ts-ignore
                 if (args!.length < data.args.required) return msg.reply({
                     content: argsAnswer,
                     allowedMentions: { repliedUser: false }
@@ -156,8 +155,8 @@ export const event: Event = {
 
             // Mención requerida y cualquier argumento
             if (data.args.requiredMention == true && data.args.required == undefined) {
-                console.log('cuarta opción')
-                console.log(args)
+
+                console.log(args);
 
                 if (msg.mentions.users.first()?.toString() !== args[0]) return msg.reply({
                     content: argsAnswer,
@@ -167,7 +166,6 @@ export const event: Event = {
             
 			// Mención requerida
 			if (data.args.requiredMention == true) {
-                console.log('mencion')
                 
                 if (msg.mentions.users.first() == undefined) return msg.reply({
                     content: argsAnswer,
@@ -177,7 +175,8 @@ export const event: Event = {
             
 			// Falta de argumentos
 			if (data.args.required == undefined) {
-                console.log('argumento');
+
+				//@ts-ignore
                 if (args.length < data.args.required) return msg.reply({
                         content: argsAnswer,
                         allowedMentions: { repliedUser: false }
@@ -191,13 +190,34 @@ export const event: Event = {
 		}
 
 		// Comando en desarrollo
-		if (data.indev) {
-			msg.reply({
-				content: '🚧 **| El comando se encuentra en desarrollo**',
-				allowedMentions: {
-					repliedUser: false
-				}
-			});
+		if (data.indev !== undefined) {
+
+			if (data.indev == 'a') {
+				msg.reply({
+					content: '🚧**・El comando se encuentra en fase Alfa**, puede provocar fallos graves',
+					allowedMentions: {
+						repliedUser: false
+					}
+				});
+			}
+			if (data.indev == 'b') {
+				msg.reply({
+					content: '🚧**・El comando se encuentra en fase Beta**, puede contener bugs',
+					allowedMentions: {
+						repliedUser: false
+					}
+				});
+			}
+			if (data.indev == 'rc') {
+				msg.reply({
+					content: '🚧**・El comando se encuentra en fase Release Candidate**, estará disponible de forma oficial en poco tiempo',
+					allowedMentions: {
+						repliedUser: false
+					}
+				});
+			}
+			
+			
 		}
 
 

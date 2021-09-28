@@ -30,19 +30,23 @@ export type Command = {
 	'manageChannels'|
 	'manageMessages'|
 	'manageEmojis'|
-	'manageAKA',
+	'manageAKA' |
+	'manageRoles' |
+	'owner',
 	
 	// Argumentos
-	usage?: string,
-	example?: string[],
+	usage: string,
+	example: string[],
 	args?: {
 		required?: number,
 		requiredMention?: boolean
 	},
 	
 	// Flags? nose como llamarlo xd
-	indev?: boolean,
+	indev?: 'Alfa' | 'Beta' | 'Release Candidate',
 
+	// Path
+	path?: any, // No se con que tipos trabaja fs xd
 
 	// Run
 	run: Run

@@ -9,7 +9,12 @@ export const command: Command = {
 	aliases: ['onion'],
 	perms: 'manageAKA',
 	
-	dev: true,
+	usage: 'cebolla',
+	example: [
+		'cebolla'
+	],
+	
+	dev: false,
 
 	run: async (client: extClient, msg: Message, args: string[]) => {
         return msg.reply('cebollaxd')

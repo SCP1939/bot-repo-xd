@@ -16,10 +16,10 @@ export const command: Command = {
     guildOnly: false,
     dev: true,
 
-	usage: '<usuario> <motivo>',
+	usage: 'test <usuario> <motivo>',
 	example: ['@usuario publicar contenido inapropiado', '@usuario xd'],
 	args: {
-		required: 5,
+		required: 1,
 		requiredMention: true
 	},
 	

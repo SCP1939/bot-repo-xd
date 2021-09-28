@@ -58,6 +58,8 @@ export default class extClient extends Client {
 				for (const file of cmds) {
 					const { command } = require(`${commandPath}/${dir}/${file}`);
 					this.commands.set(command.name, command);
+
+					command.path = dir;
 					console.log(`Loaded command \`${command.name}\``);
 					// Recopilar alias
 					if (typeof command.aliases !== 'undefined') {
