@@ -52,6 +52,7 @@ export default class extClient extends Client {
 			console.log('Commands loaded from', commandPath);
 			// Revisar todos los comandos
 			readdirSync(commandPath).forEach(async (dir) => {
+				// Aunque esté escrito en TypeScript, el código que se ejecuta es el que se transpila a JS
 				const cmds = readdirSync(`${commandPath}/${dir}`).filter((file) => file.endsWith('.js'));
 
 				// Recopilar comandos

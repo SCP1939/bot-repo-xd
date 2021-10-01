@@ -2,9 +2,8 @@ import { Message, MessageEmbed } from 'discord.js';
 import extClient from '../../client';
 import { Command } from '../../types';
 
-import Cataas from 'cataas-api';
 import axios from 'axios';
-const cataas = new Cataas();
+
 
 export const command: Command = {
 	name: 'cat',
@@ -18,7 +17,7 @@ export const command: Command = {
 		try {
 			// El embed tarda en enviarse
 			const embed = new MessageEmbed()
-				.setTitle('🐱 Miau?')
+				.setTitle('🐱・Miau?')
 				.setFooter('Cargando...')
 				.setColor('ORANGE');
 
@@ -35,7 +34,7 @@ export const command: Command = {
 
 			// Retornar gato
 			newEmbed
-				.setTitle('😻 Aquí tienes un gatito guapísimo')
+				.setTitle('😻・Aquí tienes un gatito guapísimo')
 				.setImage('https://cataas.com' + res.data.url)
 				.setColor('ORANGE')
 				.setFooter(`(Cargado en ${t2 - t1} ms.) Hecho con cataas.com`);

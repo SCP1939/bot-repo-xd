@@ -104,7 +104,7 @@ export const command: Command = {
 
 
             if(argCommand == undefined) {
-                msg.reply({
+                msg.channel.send({
                     content: '😐**・No he encontrado ese comando**',
                     allowedMentions: {
                         repliedUser: false
