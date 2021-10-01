@@ -5,10 +5,8 @@ import { Command } from '../../types';
 export const command: Command = {
 	name: 'paco',
 	description: 'temaso',
-	usage: 'paco',
-	example: [
-		'paco'
-	],
+	usage: '',
+	example: [''],
 
 	aliases: ['pako'],
 	disabled: true,

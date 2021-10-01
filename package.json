@@ -7,6 +7,8 @@
   "dependencies": {
     "@discordjs/builders": "^0.6.0",
     "@tensorflow/tfjs-node": "^3.9.0",
+    "axios": "^0.21.4",
+    "cataas-api": "^1.1.2",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
     "mongoose": "^6.0.6"

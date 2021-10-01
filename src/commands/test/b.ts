@@ -7,12 +7,10 @@ export const command: Command = {
 	description: 'temaso',
 
 	aliases: ['onion'],
-	perms: 'manageAKA',
+	//perms: 'manageAKA',
 	
-	usage: 'cebolla',
-	example: [
-		'cebolla'
-	],
+	usage: '',
+	example: [''],
 	
 	dev: false,
 

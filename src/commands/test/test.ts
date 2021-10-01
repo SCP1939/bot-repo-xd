@@ -15,8 +15,9 @@ export const command: Command = {
 	
     guildOnly: false,
     dev: true,
+	indev: 'Release Candidate',
 
-	usage: 'test <usuario> <motivo>',
+	usage: '<usuario> <motivo>',
 	example: ['@usuario publicar contenido inapropiado', '@usuario xd'],
 	args: {
 		required: 1,
