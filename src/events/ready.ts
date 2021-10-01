@@ -7,20 +7,20 @@ export const event: Event = {
         console.log('Listo');
 
 
-        const guildID = '880947411432923136';
-	    const guild = client.guilds.fetch(guildID);
+        // const guildID = '880947411432923136';
+	    // const guild = client.guilds.fetch(guildID);
 
-	    let commands;
+	    // let commands;
 
-        guild
-            ? (commands = (await guild).commands)
-            : (commands = client.application?.commands);
+        // guild
+        //     ? (commands = (await guild).commands)
+        //     : (commands = client.application?.commands);
 
-        const command = client.commands.get(commands.commandName) || client.aliases.get(commands.commandName);
+        // const command = client.commands.get(commands.commandName) || client.aliases.get(commands.commandName);
         
-        commands?.create({
-            name: 'ping',
-            description: 'Responde con pong'
-        });
+        // commands?.create({
+        //     name: 'ping',
+        //     description: 'Responde con pong'
+        // });
     }
 }
