@@ -21,7 +21,7 @@ export const command: Command = {
 	example: ['@usuario publicar contenido inapropiado', '@usuario xd'],
 	args: {
 		required: 1,
-		requiredMention: true
+		requiredMention: false
 	},
 	
 	run: async (client: extClient, msg: Message, args: string[]) => {

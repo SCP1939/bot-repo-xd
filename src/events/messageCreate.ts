@@ -81,7 +81,7 @@ export const event: Event = {
 			if (data.nsfw && !msg.channel.nsfw) {
 				return msg.channel.send({
 					content:
-						'🔥**・Ese comando solo puedo ejecutarlo en canales NSFW**',
+						'🔥**・Ese comando solo puede ejecutarse en canales NSFW**',
 					allowedMentions: { repliedUser: false }
 				});
 			}
@@ -108,16 +108,8 @@ export const event: Event = {
 				}
 			}
 
-			// Falta de argumentos
-			/*if (data.args.args) {
-				if (args.length < data.args.required || data.args.mention.mention == true && data.args.mention.required == true && msg.mentions.users.first() == undefined) {
-					return msg.channel.send({
-						content: `💠 | **Faltan argumentos**\n> Uso correcto:\n\`\`\`\n${data.usage}\`\`\`\n> Ejemplo: \n\`\`\`\n${data.example.join().replaceAll(',', '\n')}\`\`\``,
-						allowedMentions: { repliedUser: false }
-					})
-				}
-			}*/
-			
+
+			// Falta de argumentos			
 			if (data.args !== undefined) {
 
 				// Embed
