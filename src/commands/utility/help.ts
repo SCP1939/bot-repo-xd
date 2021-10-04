@@ -11,8 +11,8 @@ export const command: Command = {
 
     usage: '[comando]',
     example: [
-        'help',
-        'help ping'
+        '',
+        'ping'
     ],
 	aliases: ['h'],
 
@@ -30,7 +30,7 @@ export const command: Command = {
 			{ cat: 'moderation', cmds: [] },
 			{ cat: 'fun', cmds: [] },
 			{ cat: 'config', cmds: [] },
-			{ cat: 'beta-rc', cmds: [] },
+			{ cat: 'dev', cmds: [] },
 			{ cat: 'bot', cmds: [] }
 		];
 
@@ -56,7 +56,7 @@ export const command: Command = {
 					cmdList[5].cmds.push(e);
 					break;
 				case 'bot':
-					cmdList[6].cmds.push(e);
+					cmdList[7].cmds.push(e);
 					break;
 			}
 		});
@@ -100,7 +100,7 @@ export const command: Command = {
             // Obtener comando mediante nombre o alias
 
             let argCommand = client.commands.find((e: any) => command == e.name);
-            if(argCommand == undefined) argCommand = client.commands.find((e: any) => e.aliases.find((e: any) => command == e));
+            if(argCommand == undefined) argCommand = client.aliases.find((e: any) => e.aliases.find((e: any) => command == e));
 
 
             if(argCommand == undefined) {
@@ -122,7 +122,7 @@ export const command: Command = {
                     .addField('Permisos', `${argCommand!.perms == undefined ? 'Ninguno' : '`' + argCommand!.perms + '`'}`, true)
                     .addField('NSFW', `${argCommand!.nsfw == true ? '✅ Sí' : '❎ No'}`, true)
                     .addField('Uso', `\`${argCommand!.name} ${argCommand!.usage}\``, false)
-                    .addField('Ejemplo(s)', `${`\`\`\`\n ${argCommand!.name} ${argCommand!.example?.join('\n')}\n\`\`\``}`, false)
+                    .addField('Ejemplo(s)', `${`\`\`\`\n${argCommand!.name} ${argCommand!.example?.join(`\n${argCommand!.name} `)}\n\`\`\``}`, false)
                     .addField('En desarrollo', `${argCommand!.indev == undefined ? '❎ No' : `✅ Sí (\`${argCommand?.indev}\`)`}`, false)
                     .setColor('RANDOM')
                     .setThumbnail(client.user!.avatarURL()!)

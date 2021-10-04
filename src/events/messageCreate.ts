@@ -118,7 +118,7 @@ export const event: Event = {
 				.setAuthor(msg.author.username ,msg.author.avatarURL()!)
 				.setDescription('Faltan argumentos')
 				.addField('Uso correcto', `\`${data.name} ${data.usage}\``, false)
-				.addField('Ejemplo(s)', `${'```\n' + data.example?.join('\n')+ '```'}`, false)
+				.addField('Ejemplo(s)', `${'```\n' + data.name + ' ' + data.example?.join(`\n${data.name} `)+ '```'}`, false)
 				.setColor('RED')
 				.setThumbnail(client.user!.avatarURL()!)
 				.setFooter('Recuerda: los argumentos <> son obligatorios y los [] son opcionales', client.user!.avatarURL()!)
