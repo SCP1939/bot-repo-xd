@@ -5,9 +5,11 @@
   "author": "Gatomo",
   "license": "MIT",
   "dependencies": {
+    "@types/fuzzy-search": "^2.1.1",
     "axios": "^0.21.4",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
+    "fuzzy-search": "^3.2.1",
     "mongoose": "^6.0.6"
   },
   "scripts": {
@@ -15,11 +17,11 @@
     "dev": "nodemon src/index.ts"
   },
   "devDependencies": {
-    "cataas-api": "^1.1.2",
     "@discordjs/builders": "^0.6.0",
-    "@tensorflow/tfjs-node": "^3.9.0",
     "@tensorflow-models/toxicity": "^1.2.2",
     "@tensorflow/tfjs": "^3.9.0",
+    "@tensorflow/tfjs-node": "^3.9.0",
+    "cataas-api": "^1.1.2",
     "nodemon": "^2.0.12",
     "ts-node": "^10.2.1"
   }

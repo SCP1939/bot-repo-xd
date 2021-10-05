@@ -11,11 +11,10 @@ export const command: Command = {
 	aliases: ['kitty', 'cats', 'meow'],
 	usage: '',
 	example: [''],
-	indev: 'Release Candidate',
 
 	run: async (client: extClient, msg: Message, args: string[]) => {
 		try {
-			// El embed tarda en enviarse
+			// Embed
 			const embed = new MessageEmbed()
 				.setTitle('🐱・Miau?')
 				.setFooter('Cargando...')

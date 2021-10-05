@@ -11,7 +11,7 @@ export const command: Command = {
 	usage: '<subreddit>',
 	example: ['discordapp', 'cat'],
 	args: { required: 1 },
-	indev: 'Release Candidate',
+
 	run: async (client: extClient, msg: Message, args: string[]) => {
 		try {
 			// Argumentos
@@ -85,6 +85,7 @@ export const command: Command = {
 				return msg.channel.send({ embeds: [embed] });
 			}
 		} catch (err) {
+			msg.reactions.cache.get('⏳')?.remove();
 			return msg.channel.send('**😐・No encuentro a ese subreddit**');
 		}
 	}
