@@ -20,17 +20,40 @@ export const command: Command = {
 			const avatar = msg.mentions.users.first()?.id || args[0] || msg.author.id;
 			const user = await client.users.fetch(avatar);
 
+
 			// embed
 			const embed = new MessageEmbed()
 				.setTitle(`🔎・Avatar de ${user.username}`)
-				.setDescription(`[Avatar URL](${user.avatarURL({format: 'png', size: 1024, dynamic: true})})`)
-				.setImage(`${user.avatarURL({format: 'png', size: 1024, dynamic: true})}`)
+				.setDescription(
+					`${
+						user.avatarURL() == null
+							? '*Este usuario no tiene avatar*'
+							: `[Avatar URL](${
+								user.avatarURL({
+									format: 'png',
+									size: 1024,
+									dynamic: true
+						  	})})`
+					}`
+				)
+				.setImage(
+					`${
+						user.avatarURL() == null
+							? 'https://media.discordapp.net/attachments/889934987619606549/895015630258962483/2754.png'
+							: user.avatarURL({
+									format: 'png',
+									size: 1024,
+									dynamic: true
+							  })
+					}`
+				)
 				.setFooter(`Pedido por ${msg.author.username}`)
 				.setColor('RANDOM');
 
 			return msg.channel.send({ embeds: [embed] });
 		} catch (err) {
-			return msg.channel.send('**😐・No encuentro a ese usuario**');
+			//@ts-ignore
+			return mg.channel.send('**😐・No encuentro a ese usuario**');
 		}
 	}
-}
+};
