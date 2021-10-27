@@ -34,6 +34,7 @@ export default class extClient extends Client {
 			this.login(config.token);
 
 			// Conexión con Mongo DB
+			if (typeof config.mongo == 'string') {
 				console.log('Mongo DB working')
 				connect(config.mongo, {
 					//@ts-ignore
@@ -41,6 +42,7 @@ export default class extClient extends Client {
 					useFindAndModify: true,
 					useNewUrlParser: true
 				})
+			}
 
 			
 			/***********************/
