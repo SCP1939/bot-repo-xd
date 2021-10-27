@@ -33,7 +33,7 @@ export const command: Command = {
 									format: 'png',
 									size: 1024,
 									dynamic: true
-						  	})})`
+							})})`
 					}`
 				)
 				.setImage(
@@ -44,7 +44,7 @@ export const command: Command = {
 									format: 'png',
 									size: 1024,
 									dynamic: true
-							  })
+							})
 					}`
 				)
 				.setFooter(`Pedido por ${msg.author.username}`)
@@ -52,8 +52,7 @@ export const command: Command = {
 
 			return msg.channel.send({ embeds: [embed] });
 		} catch (err) {
-			//@ts-ignore
-			return mg.channel.send('**😐・No encuentro a ese usuario**');
+			return msg.channel.send('**😐・No encuentro a ese usuario**');
 		}
 	}
-};
+}

@@ -196,19 +196,17 @@ export const event: Event = {
 
 			/***********************/
 
-			console.log('Try')
+
 			// Ejecución de comandos
 			if (command) {
 				try {
-					console.log('try in a try'); // momentos en los que tener ; te salva
+					//console.log('try in a try'); // momentos en los que tener ; te salva
 					(command as Command).run(client, msg, args);
 				} catch (err) {
-					console.log('catch into a try');
 					msg.channel.send(`😐**・Se ha producido un error al ejecutar ese comando**\n\`\`\`\n${err}\n\`\`\`\n> Porfavor, ponte en contacto con mis desarrolladores y envíales una copia de este mensaje\n> https://discord.gg/whjyNhkk9V`)
 				}
 			}
 		} catch (err) {
-			console.log('Catch')
 			msg.channel.send(`😐**・Se ha producido un error al ejecutar ese comando**\n\`\`\`\n${err}\n\`\`\`\n> Porfavor, ponte en contacto con mis desarrolladores y envíales una copia de este mensaje\n> https://discord.gg/whjyNhkk9V`)
 		}
 	}

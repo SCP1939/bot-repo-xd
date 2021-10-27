@@ -20,19 +20,72 @@ export const command: Command = {
 	usage: '<usuario> <motivo>',
 	example: ['@usuario publicar contenido inapropiado', '@usuario xd'],
 	args: {
-		required: 1,
-		requiredMention: false
+		required: 1
 	},
 	
 	run: async (client: extClient, msg: Message, args: string[]) => {
-		const mention = msg.mentions.members?.first();
-		const reason = args.slice(1).join(' ');
+		try {
+			const crud = args[0];
+			const data = args[1];
+
+			if (data == 'c') {
+					if (crud !== undefined) {
+						const newData = new warn({
+							reason: 'hola que tal'
+						});
 		
-		msg.channel.send(`${mention}, ${reason}`);
+						const savedData = newData.save();
+		
+						return msg.channel.send(`CRUD: \`create\`\nDato: \`${(await savedData).reason}\``);
+					} else {
+						return msg.channel.send('Escribe un dato')
+					}
+			} else if (crud == 'r') {
+					if (data !== undefined) {
+						const getData = await warn.findOne({reason: data});
+
+						return msg.channel.send(`CRUD: \`findOne\`\nDato: \`${getData?.reason}\``);
+					} else {
+						const getData = await warn.find();
+						// @ts-ignore
+						return msg.channel.send(`CRUD: \`find\`\nDato: \`${getData?.reason}\``);
+					}
+			} else if (crud == 'u') {
+					if (data !== undefined) {
+						const getData = await warn.findOneAndUpdate({
+							reason: data
+						})
+						return msg.channel.send(`CRUD: \`update\`\nDato: \`${getData?.reason}\``);
+					} else {
+						return msg.channel.send('Escribe un dato')
+					}
+				} else if (crud == 'd') {
+					if (data !== undefined) {
+						const deleteData = await warn.findOneAndDelete({
+							reason: data
+						});
+
+						return msg.channel.send(`CRUD: \`delete\`\nDato: \`${deleteData?.reason}\``);
+					} else {
+						return msg.channel.send('Escribe un dato')
+					}
+				} else {
+					return msg.channel.send('Escribe un parámetro de CRUD válido (c, r, u, d)')
+				}
+			
+		} catch (error) {
+			msg.channel.send(`Ha habido un error\n\`\`\`\n${error}\n\`\`\``)
+		}
 	}
 }
 
+/* Prueba de argumentos
 
+const mention = msg.mentions.members?.first();
+const reason = args.slice(1).join(' ');
+
+msg.channel.send(`${mention}, ${reason}`);
+*/
 
 /* Prueba de tensorflow (toxicidad)
 

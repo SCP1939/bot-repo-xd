@@ -1,14 +1,14 @@
 import { Schema, model, Document } from 'mongoose';
 
 interface IWarn extends Document {
-  user: string,
-  reason: string
+	//user: string,
+	reason: string
 }
 
 
 const schema = new Schema<IWarn>({
-  user: { type: String, required: true },
-  reason: { type: String, required: true }
+	//user: { type: String, required: true },
+	reason: { type: String, required: true }
 });
 
 

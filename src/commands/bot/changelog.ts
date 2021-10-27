@@ -48,20 +48,21 @@ export const command: Command = {
             {
                 version: '2.0a',
                 release: '01/10/2021',
-                // Esto que voy a hacer es feísimo pero si no me muestra las tabulaciones
-                changes: `
-Después de un abandono del proyecto por motivos personales y el hackeo de mi cuenta, tras meditarlo durante un tiempo, he decidido reprogramar todo el bot desde cero para crear un bot más seguro, útil y entretenido.
-
-Características:
-- Escrito en TypeScript
-- Uso de Discord.JS 13
-- Mejor mantenimiento
-- Comandos variados y funcionales
-- Y más...
-
-Agradecimientos:
-- Gracias a Bryanandnothingelse y SCP por la motivación y la ayuda en el desarrollo 😄
-            `,
+                // Uso un array y un join porque si no me queda sucio el código
+                changes: [
+                    'Después de un abandono del proyecto por motivos personales y el hackeo de mi cuenta, tras meditarlo durante un tiempo, he decidido reprogramar todo el bot desde cero para crear un bot más seguro, útil y entretenido.',
+                    ' ',
+                    'Características:',
+                    '- Escrito en TypeScript',
+                    '- Uso de Discord.JS 13',
+                    '- Mejor mantenimiento',
+                    '- Comandos variados y funcionales',
+                    '- Y más...',
+                    ' ',
+                    'Agradecimientos:',
+                    '- Gracias a Bryanandnothingelse y SCP por la motivación y la ayuda en el desarrollo 😄'
+                ].join('\n')
+            ,
                 patches: ['20aC001']
             }
         ];
