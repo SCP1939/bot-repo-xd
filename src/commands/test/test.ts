@@ -11,7 +11,7 @@ export const command: Command = {
 	description: 'temaso',
 	
 	aliases: ['t'],
-	disabled: false,
+	disabled: true, // desactivado en producción temporalmente
 	
     guildOnly: false,
     dev: true,
