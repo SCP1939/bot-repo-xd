@@ -75,7 +75,7 @@ export const command: Command = {
 			msg.channel.send(`Ha habido un error\n\`\`\`\n${error}\n\`\`\``)
 		}*/
 		
-		return msg.channel.send('```' + args.join(', ') + '```');
+		return msg.channel.send(args[0].startsWith('<@') ? 'Mention' : 'No mention');
 	}
 }
 

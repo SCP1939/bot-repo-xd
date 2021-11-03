@@ -19,8 +19,7 @@ export const command: Command = {
 		try {
 			const avatar = msg.mentions.users.first()?.id || args[0] || msg.author.id;
 			const user = await client.users.fetch(avatar);
-
-
+			msg.channel.send(`el arg es ${args}`)
 			// embed
 			const embed = new MessageEmbed()
 				.setTitle(`🔎・Avatar de ${user.username}`)
