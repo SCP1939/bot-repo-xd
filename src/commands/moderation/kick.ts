@@ -7,21 +7,18 @@ import extClient from '../../client';
 import { Command } from '../../types';
 
 export const command: Command = {
-	name: '',
-	description: '',
-    aliases: [''],
-    
-    nsfw: false,
-	disabled: false,
-	dev: false,
-    
-	usage: '',
-	example: ['*preserve command*'],
+	name: 'kick',
+	description: 'Expulsa a un usuario del servidor',
+    aliases: ['kickmember'],
+	usage: '<usuario> [motivo]',
+	example: ['', '@usuario spam', '@usuario', '012345678901234567'],
+
+
     args: 1,
 
-    perms: '',
-    indev: '',
+    perms: 'kick',
+    indev: 'Alfa',
 	run: async (client: extClient, msg: Message, args: string[]) => {
-        return
+        return args
     }
 }

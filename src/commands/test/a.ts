@@ -11,7 +11,6 @@ export const command: Command = {
 	aliases: ['pako'],
 	disabled: true,
 
-	guildOnly: true,
 	dev: true,
 
 	run: async (client: extClient, msg: Message, args: string[]) => {

@@ -19,7 +19,7 @@ export type Command = {
 	disabled?: boolean,
 
 	// Inhibidores
-	guildOnly?: boolean,
+	// guildOnly?: boolean,
 	nsfw?: boolean,
 
 	// Permisos
@@ -37,10 +37,7 @@ export type Command = {
 	// Argumentos
 	usage: string,
 	example: string[],
-	args?: {
-		required?: number,
-		requiredMention?: boolean
-	},
+	args?: number,
 	
 	// Flags? nose como llamarlo xd
 	indev?: 'Alfa' | 'Beta' | 'Release Candidate',

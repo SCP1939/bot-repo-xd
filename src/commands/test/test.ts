@@ -9,29 +9,24 @@ import { Command } from '../../types';
 export const command: Command = {
 	name: 'test',
 	description: 'temaso',
-	
 	aliases: ['t'],
-	disabled: true, // desactivado en producción temporalmente
-	
-    guildOnly: false,
+
     dev: true,
 	indev: 'Release Candidate',
 
 	usage: '<usuario> <motivo>',
 	example: ['@usuario publicar contenido inapropiado', '@usuario xd'],
-	args: {
-		required: 1
-	},
+	args: 1,
 	
 	run: async (client: extClient, msg: Message, args: string[]) => {
-		try {
-			const crud = args[0];
-			const data = args[1];
+		/*try {
+			const crud = args[1];
+			const data = args.slice(2).join(' ');	
 
-			if (data == 'c') {
-					if (crud !== undefined) {
+			if (crud == 'c') {
+					if (data.length > 0) {
 						const newData = new warn({
-							reason: 'hola que tal'
+							reason: data
 						});
 		
 						const savedData = newData.save();
@@ -40,8 +35,9 @@ export const command: Command = {
 					} else {
 						return msg.channel.send('Escribe un dato')
 					}
-			} else if (crud == 'r') {
-					if (data !== undefined) {
+			} 
+			if (crud == 'r') {
+					if (data.length > 0) {
 						const getData = await warn.findOne({reason: data});
 
 						return msg.channel.send(`CRUD: \`findOne\`\nDato: \`${getData?.reason}\``);
@@ -50,8 +46,9 @@ export const command: Command = {
 						// @ts-ignore
 						return msg.channel.send(`CRUD: \`find\`\nDato: \`${getData?.reason}\``);
 					}
-			} else if (crud == 'u') {
-					if (data !== undefined) {
+			} 
+			if (crud == 'u') {
+					if (data .length > 0) {
 						const getData = await warn.findOneAndUpdate({
 							reason: data
 						})
@@ -59,13 +56,14 @@ export const command: Command = {
 					} else {
 						return msg.channel.send('Escribe un dato')
 					}
-				} else if (crud == 'd') {
+				} 
+				if (crud == 'd') {
 					if (data !== undefined) {
 						const deleteData = await warn.findOneAndDelete({
 							reason: data
 						});
 
-						return msg.channel.send(`CRUD: \`delete\`\nDato: \`${deleteData?.reason}\``);
+						return msg.channel.send(`CRUD: \`delete\`\nDato: \`${deleteData}\``);
 					} else {
 						return msg.channel.send('Escribe un dato')
 					}
@@ -75,7 +73,9 @@ export const command: Command = {
 			
 		} catch (error) {
 			msg.channel.send(`Ha habido un error\n\`\`\`\n${error}\n\`\`\``)
-		}
+		}*/
+		
+		return msg.channel.send('```' + args.join(', ') + '```');
 	}
 }
 

@@ -10,12 +10,12 @@ export const command: Command = {
 	aliases: ['subreddit'],
 	usage: '<subreddit>',
 	example: ['discordapp', 'cat'],
-	args: { required: 1 },
+	args: 1,
 
 	run: async (client: extClient, msg: Message, args: string[]) => {
 		try {
 			// Argumentos
-			const subreddit = args[1];
+			const subreddit = args[0];
 
 			// Reaccion de cargando
 			msg.react('⏳');

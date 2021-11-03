@@ -34,13 +34,14 @@ export default class extClient extends Client {
 			this.login(config.token);
 
 			// Conexión con Mongo DB
-			if (typeof config.mongo == 'string') {
+			if (config.mongo !== undefined) {
 				console.log('Mongo DB working')
-				connect(config.mongo, {
-					//@ts-ignore
-					useUnifiedTopology: true,
-					useFindAndModify: true,
-					useNewUrlParser: true
+				connect(config.mongo!, e => {
+					return {
+						useUnifiedTopology: true,
+						useFindAndModify: true,
+						useNewUrlParser: true
+					}
 				})
 			}
 
