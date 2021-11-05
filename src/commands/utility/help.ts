@@ -2,6 +2,7 @@ import { Message, MessageEmbed } from 'discord.js';
 import { config } from '../../botconfig';
 import extClient from '../../client';
 import { Command } from '../../types';
+import { msgError } from '../../util/msgs';
 
 // El algoritmo para obtener los comandos lo he improvisado
 // Seguramente sea una mierda pero funciona xd
@@ -123,31 +124,11 @@ export const command: Command = {
 				);
 
 			if (argCommand == undefined) {
-				const embed = new MessageEmbed()
-					.setTitle('❌・Error')
-					.setAuthor(msg.author.username, msg.author.avatarURL({ dynamic: true })!)
-					.setDescription('No he encontrado ese comando')
-					.setColor('RED');
-				return msg.reply({
-					embeds: [embed],
-					allowedMentions: {
-						repliedUser: false
-					}
-				});
-			} else if (msg.author.id !== config.dev && argCommand.dev == true) {
-				// Comando solo para desarrolladores
-				const embed = new MessageEmbed()
-					.setTitle('❌・Error')
-					.setAuthor(msg.author.username, msg.author.avatarURL({ dynamic: true })!)
-					.setDescription('No tienes permiso para ver ese comando')
-					.setColor('RED');
+				return msgError('No he encontrado ese comando', msg, client);
 
-				return msg.reply({
-					embeds: [embed],
-					allowedMentions: {
-						repliedUser: false
-					}
-				});
+			} else if (msg.author.id !== config.dev && argCommand.dev == true) {
+				return msgError('No tienes permiso para ver ese comando', msg, client);
+
 			} else {
 				// Embed
 				const embed = new MessageEmbed()
@@ -185,7 +166,8 @@ export const command: Command = {
 					)
 					.addField(
 						'Ejemplo(s)',
-						`${`\`\`\`\n${argCommand!.example[0] == '*preserve command*' ? argCommand!.name : ''} ${
+						`${`\`\`\`\n${argCommand!.example[0] == '' ? argCommand!.name : ''
+					} ${
 							argCommand!.example !== undefined
 								? argCommand!.example?.join(
 										`\n${argCommand!.name} `

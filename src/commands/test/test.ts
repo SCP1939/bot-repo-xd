@@ -3,6 +3,7 @@ import { Message, MessageMentions } from 'discord.js';
 import extClient from '../../client';
 import { warn } from '../../db/model/warn';
 import { Command } from '../../types';
+import { msgDone, msgError, msgInfo, msgWarn } from '../../util/msgs';
 
 
 
@@ -74,7 +75,10 @@ export const command: Command = {
 		} catch (error) {
 			msg.channel.send(`Ha habido un error\n\`\`\`\n${error}\n\`\`\``)
 		}*/
-		
+		msgError('Esto es un error', msg, client);
+		msgWarn('Esto es una advertencia', msg, client);
+		msgInfo('Esto es una info', msg, client);
+		msgDone('Esto es un done', msg, client);
 		return msg.channel.send(args[0].startsWith('<@') ? 'Mention' : 'No mention');
 	}
 }

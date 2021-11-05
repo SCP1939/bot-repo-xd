@@ -39,7 +39,7 @@ export default class extClient extends Client {
 				connect(config.mongo!, e => {
 					return {
 						useUnifiedTopology: true,
-						useFindAndModify: true,
+						useFindAndModify: true, 
 						useNewUrlParser: true
 					}
 				})
@@ -64,6 +64,7 @@ export default class extClient extends Client {
 
 					command.path = dir;
 					console.log(`Loaded command \`${command.name}\``);
+
 					// Recopilar alias
 					if (typeof command.aliases !== 'undefined') {
 						if (command.aliases.length !== 0) {
@@ -75,6 +76,7 @@ export default class extClient extends Client {
 				}
 			});
 
+			// gatomo el gay
 
 			/** EVENTOS **/
 			const eventPath = join(__dirname, '..', 'events');
@@ -85,14 +87,14 @@ export default class extClient extends Client {
 
 				// Recopilar eventos
 				this.events.set(event.name, event);
-				console.log(`Loaded event \`${event.name}\``);
+				console.log(`Cargado evento ${event.name}`);
 
 				// Ejecutar eventos
 				this.on(event.name, event.run.bind(null, this));
 			});
 
 		} catch (err) {
-			console.error(err);
+			console.log(err); // no me afecta, tengo git
 		}
 	}
 }

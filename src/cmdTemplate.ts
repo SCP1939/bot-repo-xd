@@ -16,7 +16,7 @@ export const command: Command = {
 	dev: false,
     
 	usage: '',
-	example: ['*preserve command*'],
+	example: [''], // si es '', se muestra el comando solo en el ejemplo
     args: 1,
 
     perms: '',
