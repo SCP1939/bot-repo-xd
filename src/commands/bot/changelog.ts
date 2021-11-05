@@ -6,7 +6,7 @@ export const command: Command = {
 	name: 'changelog',
 	description: 'Muestra los cambios del bot en cada versión',
 	usage: '[versión]',
-	example: ['', '0.1a', 'v.2.1'],
+	example: ['', '2.0a'],
     indev: 'Alfa',
 
 	run: async (client: extClient, msg: Message, args: string[]) => {
@@ -63,7 +63,7 @@ export const command: Command = {
                     '- Gracias a Bryanandnothingelse y SCP por la motivación y la ayuda en el desarrollo 😄'
                 ].join('\n')
             ,
-                patches: ['20aC001']
+                patches: ['20aC001', '20aB002']
             }
         ];
 
@@ -93,10 +93,12 @@ export const command: Command = {
             let v = changelog.find((e: any) => version == e.version);
 
             if(v == undefined) {
-                msg.channel.send({
-                    content: '😐**・No he encontrado esea versión**'
+                msg.channel.send({ // carta reverse
+                    content: '😐**・No he encontrado esa versión**'
                 });
-
+                // carta blooqueo
+                // we're no strangers to love \n you know the rules and so do I \n a full commitment's what I'm thinking of \n you wouldn't get this from any other guy \n I just wanna tell you how I'm feeling \n Gotta make you understand \n Never gonna give you up \n Never gonna let you down \n Never gonna run around and desert you \n Never gonna make you cry \n Never gonna say goodbye \n Never gonna tell a lie and hurt you',
+                // never gonna give you up \n never gonna let you down \n never gonna run around and desert you \n never gonna make you cry \n never gonna say goodbye \n never gonna tell a lie and hurt you
             } else {
                 // Embed
                 const embed = new MessageEmbed()
