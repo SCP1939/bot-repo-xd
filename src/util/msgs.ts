@@ -89,3 +89,10 @@ export function msgDone(content: string, msg: Message, client: extClient) {
 	return msg.reply({ embeds: [embed] });
 }
 
+// error crítico
+export function msgCritical(content: any, msg: Message, client: extClient) {
+	return msg.reply(
+		`<:Nerror:906291571522142309>**・Se ha producido un error crítico al ejecutar ese comando:**\n\`\`\`\n${content}\n\`\`\`\n> Porfavor, ponte en contacto con mis desarrolladores y envíales una copia de este mensaje\n> https://discord.gg/whjyNhkk9V`
+	);
+}
+

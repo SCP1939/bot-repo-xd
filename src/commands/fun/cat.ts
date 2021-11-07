@@ -1,8 +1,11 @@
 import { Message, MessageEmbed } from 'discord.js';
-import extClient from '../../client';
 import { Command } from '../../types';
+import extClient from '../../client';
 
 import axios from 'axios';
+
+import { color as c } from '../../botconfig';
+import { msgCritical, msgError } from '../../util/msgs';
 
 
 export const command: Command = {
@@ -16,36 +19,38 @@ export const command: Command = {
 		try {
 			// Embed
 			const embed = new MessageEmbed()
-				.setTitle('🐱・Miau?')
-				.setFooter('Cargando...')
-				.setColor('ORANGE');
-
-			const message = await msg.channel.send({ embeds: [embed] });
-
-			const newEmbed = message.embeds[0];
-
-
-			// Sin dudarlo la mejor API (excepto por el ping)
-			let t1 = +new Date();
-			const res = await axios.get('https://cataas.com/cat?json=true');
-			let t2 = +new Date();
-
-
-			// Retornar gato
-			newEmbed
-				.setTitle('😻・Aquí tienes un gatito guapísimo')
-				.setImage('https://cataas.com' + res.data.url)
-				.setColor('ORANGE')
-				.setFooter(`(Cargado en ${t2 - t1} ms.) Hecho con cataas.com`);
-
-			message.react('❤️');
-
-			return message.edit({ embeds: [newEmbed] });
-
+			.setTitle('🐱・Miau?')
+					.setFooter('Cargando...')
+					.setColor(c.default);
+					
+				const message = await msg.channel.send({ embeds: [embed] });
+				
+				const newEmbed = message.embeds[0];
+	
+	
+			try {
+				// Sin dudarlo la mejor API (excepto por el ping)
+				let t1 = +new Date();
+				const res = await axios.get('https://cataas.com/cat?json=true');
+				let t2 = +new Date();
+	
+	
+				// Retornar gato
+				newEmbed
+					.setTitle('😻・Aquí tienes un gatito guapísimo')
+					.setImage('https://cataas.com' + res.data.url)
+					.setColor(c.default)
+					.setFooter(`(Cargado en ${t2 - t1} ms.) Hecho con cataas.com`);
+	
+				message.react('❤️');
+	
+				return message.edit({ embeds: [newEmbed] });
+	
+			} catch (err) {
+				return msgError('Ha habido un problema obteniendo el gatito. Vuelve a intentarlo!', msg, client);
+			}
 		} catch (err) {
-			return msg.channel.send(
-				'🤔**・Hmmm, parece que algo no salió bien. Vuelve a intentarlo!**'
-			);
+			return msgCritical(err, msg, client);
 		}
 	}
 }

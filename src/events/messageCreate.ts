@@ -1,7 +1,7 @@
 import { Event, Command } from '../types';
 import { Message, MessageEmbed, Permissions } from 'discord.js';
 import { config } from '../botconfig';
-import { msgErrorEmoji } from '../util/msgs';
+import { msgCritical, msgErrorEmoji } from '../util/msgs';
 
 /***********************/
 
@@ -198,11 +198,7 @@ export const event: Event = {
 		if (data.args !== undefined) {
 			// Embed
 			const embed = new MessageEmbed()
-				.setTitle(`❌・Error`)
-				.setAuthor(
-				msg.author.username,
-				msg.author.avatarURL({ dynamic: true })!
-				)
+				.setTitle(`<:Nerror:906291571522142309>・Error`)
 				.setDescription('Faltan argumentos')
 				.addField(
 					'Uso correcto',
@@ -212,7 +208,7 @@ export const event: Event = {
 				.addField(
 					'Ejemplo(s)',
 					`${`\`\`\`\n${
-					data.example[0] == '*preserve command*'
+					data.example[0] == ''
 					? data.name
 					: ''
 					} ${
@@ -314,9 +310,7 @@ export const event: Event = {
 			return (command as Command).run(client, msg, args);
 		}
 		} catch (err) {
-			msg.reply(
-				`😐**・Se ha producido un error al ejecutar ese comando**\n\`\`\`\n${err}\n\`\`\`\n> Porfavor, ponte en contacto con mis desarrolladores y envíales una copia de este mensaje\n> https://discord.gg/whjyNhkk9V`
-			);
+			msgCritical(err, msg, client);
 		}
 	}
 }

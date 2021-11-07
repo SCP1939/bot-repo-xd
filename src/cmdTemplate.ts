@@ -1,10 +1,14 @@
 // Template de comandos
 
 import { Message } from 'discord.js';
-//@ts-ignore
-import extClient from '../../client';
-//@ts-ignore
+// @ts-ignore
 import { Command } from '../../types';
+// @ts-ignore
+import extClient from '../../client';
+// @ts-ignore
+import { msgCritical } from '../../util/msgs';
+// @ts-ignore
+import { color as c } from '../../botconfig';
 
 export const command: Command = {
 	name: '',
@@ -16,12 +20,16 @@ export const command: Command = {
 	dev: false,
     
 	usage: '',
-	example: [''], // si es '', se muestra el comando solo en el ejemplo
+	example: [''], // si es '', se muestra el comando sin argumentos en el ejemplo
     args: 1,
 
     perms: '',
     indev: '',
 	run: async (client: extClient, msg: Message, args: string[]) => {
-        return
+        try {
+
+        } catch (err) {
+			return msgCritical(err, msg, client);
+		}
     }
 }

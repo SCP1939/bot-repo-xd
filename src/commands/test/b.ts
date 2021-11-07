@@ -11,6 +11,7 @@ export const command: Command = {
 	
 	usage: '',
 	example: [''],
+	nsfw: true,
 	
 	dev: false,
 
