@@ -1,1 +1,1 @@
-worker: tsc && yarn start
+worker: node_modules/typescript/bin/tsc && yarn start
