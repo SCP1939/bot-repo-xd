@@ -5,7 +5,7 @@ import extClient from '../../client';
 import axios from 'axios';
 
 import { color as c } from '../../botconfig';
-import { msgCritical, msgError } from '../../util/msgs';
+import { msgCritical, msgErrorEmoji, msgError } from '../../util/msgs';
 
 export const command: Command = {
 	name: 'reddit',
@@ -21,8 +21,7 @@ export const command: Command = {
 			const subreddit = args[0];
 			
 			// Reaccion de cargando
-			//@ts-ignore
-			msg.reaact('⏳');
+			msg.react('⏳');
 			
 			
 			// Para que este bucle while?
@@ -48,7 +47,7 @@ export const command: Command = {
 						// Eliminar reacción de cargando
 						msg.reactions.cache.get('⏳')?.remove();
 	
-						return msgError('Tiempo de espera agotado (`10000 ms.`)', msg, client)
+						return msgErrorEmoji('Tiempo de espera agotado (`10000 ms.`)', '⌛', msg, client)
 					}
 	
 					// Si no contiene imagen se vuelve a pedir un dato aleatorio
@@ -60,35 +59,35 @@ export const command: Command = {
 						loop = false;
 					}
 				}
-	
+				
 				// Evitar contenido nsfw
 				// @ts-ignore
 				if (!msg.channel.nsfw && data.over_18) {
 					// Eliminar reacción de cargando
 					msg.reactions.cache.get('⏳')?.remove();
 					
-					return msgError(`El subreddit** \`${data.subreddit}\` **tiene contenido no apto para menores. dirígete a un canal NSFW y vuelve a intentarlo**`, msg, client)
+					return msgErrorEmoji(`**El subreddit** \`${data.subreddit}\` **tiene contenido no apto para menores.**\n> dirígete a un canal NSFW y vuelve a intentarlo`, '🔞', msg, client)
 				} else {
 					// Eliminar reacción de cargando
 					msg.reactions.cache.get('⏳')?.remove();
-	
+					
 					// Embed
 					const embed = new MessageEmbed()
-						.setTitle(`${data.title}`)
-						.setURL(`https://www.reddit.com${data.permalink}`)
-						.setAuthor(`r/${data.subreddit} - ${data.author}`)
-						.setImage(`${data.url}`)
-						.setFooter(
-							`(Cargado en ${t2! - t1!} ms.) Upvotes: ${data.ups}`
+					.setTitle(`${data.title}`)
+					.setURL(`https://www.reddit.com${data.permalink}`)
+					.setAuthor(`r/${data.subreddit} - ${data.author}`)
+					.setImage(`${data.url}`)
+					.setFooter(
+						`(Cargado en ${t2! - t1!} ms.) Upvotes: ${data.ups}`
 						)
 						.setColor(c.default);
-	
-					return msg.channel.send({ embeds: [embed] });
+						
+						return msg.channel.send({ embeds: [embed] });
+					}
+				} catch (err) {
+					msg.reactions.cache.get('⏳')?.remove();
+					return msgError('No encuentro a ese subreddit', msg, client)
 				}
-			} catch (err) {
-				msg.reactions.cache.get('⏳')?.remove();
-				return msgError('No encuentro a ese subreddit', msg, client)
-			}
 		} catch (err) {
 			return msgCritical(err, msg, client);
 		}

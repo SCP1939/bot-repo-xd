@@ -1,5 +1,6 @@
 import { Message, MessageSelectMenu, MessageEmbed } from 'discord.js';
 import extClient from '../client';
+import { color as c } from '../botconfig';
 const { version } = require('../../package.json');
 
 let message: Message;
@@ -27,7 +28,7 @@ export function msgError(content: string, msg: Message, client: extClient) {
 	const embed = new MessageEmbed()
 		.setTitle(`<:Nerror:906291571522142309>・Error`)
 		.setDescription(content)
-		.setColor('#ef5350')
+		.setColor(c.error)
 		.setFooter(
 			`Normal ${version}`,
 			client.user!.avatarURL()!
@@ -40,7 +41,7 @@ export function msgErrorEmoji(content: string, emoji: string, msg: Message, clie
 	const embed = new MessageEmbed()
 		.setTitle(`${emoji}・Error`)
 		.setDescription(content)
-		.setColor('#ef5350')
+		.setColor(c.error)
 		.setFooter(
 			`Normal ${version}`,
 			client.user!.avatarURL()!
@@ -55,7 +56,7 @@ export function msgWarn(content: string, msg: Message, client: extClient) {
 	const embed = new MessageEmbed()
 		.setTitle(`<:Nwarn:906291449228820480>・Advertencia`)
 		.setDescription(content)
-		.setColor('#ffc107')
+		.setColor(c.warn)
 		.setFooter(
 			`Normal ${version}`,
 			client.user!.avatarURL()!
@@ -68,7 +69,7 @@ export function msgInfo(content: string, msg: Message, client: extClient) {
 	const embed = new MessageEmbed()
 		.setTitle(`<:Ninfo:906291652488990820>・Info`)
 		.setDescription(content)
-		.setColor('#2196f3')
+		.setColor(c.info)
 		.setFooter(
 			`Normal ${version}`,
 			client.user!.avatarURL()!
@@ -81,7 +82,7 @@ export function msgDone(content: string, msg: Message, client: extClient) {
 	const embed = new MessageEmbed()
 		.setTitle(`<:Ncorrecto:906290866308661278>・Hecho`)
 		.setDescription(content)
-		.setColor('#2dcca2')
+		.setColor(c.success)
 		.setFooter(
 			`Normal ${version}`,
 			client.user!.avatarURL()!

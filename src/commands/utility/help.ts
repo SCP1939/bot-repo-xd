@@ -1,8 +1,8 @@
 import { Message, MessageEmbed } from 'discord.js';
-import { config } from '../../botconfig';
+import { color as c, config } from '../../botconfig';
 import extClient from '../../client';
 import { Command } from '../../types';
-import { msgError } from '../../util/msgs';
+import { msgCritical, msgError } from '../../util/msgs';
 
 // El algoritmo para obtener los comandos lo he improvisado
 // Seguramente sea una mierda pero funciona xd
@@ -16,189 +16,192 @@ export const command: Command = {
 	aliases: ['h'],
 
 	run: async (client: extClient, msg: Message, args: string[]) => {
-		// Argumentos
-		let command = args[0];
+		try {
+			// Argumentos
+			let command = args[0];
 
-		// Listado donde se guardarán los comandos
-		let cmdList: any = [
-			{ cat: 'test', cmds: [] },
-			{ cat: 'reaction', cmds: [] },
-			{ cat: 'utility', cmds: [] },
-			{ cat: 'moderation', cmds: [] },
-			{ cat: 'fun', cmds: [] },
-			{ cat: 'config', cmds: [] },
-			{ cat: 'dev', cmds: [] },
-			{ cat: 'bot', cmds: [] }
-		];
+			// Listado donde se guardarán los comandos
+			let cmdList: any = [
+				{ cat: 'test', cmds: [] },
+				{ cat: 'reaction', cmds: [] },
+				{ cat: 'utility', cmds: [] },
+				{ cat: 'moderation', cmds: [] },
+				{ cat: 'fun', cmds: [] },
+				{ cat: 'config', cmds: [] },
+				{ cat: 'dev', cmds: [] },
+				{ cat: 'bot', cmds: [] }
+			];
 
-		// Obtener todos los comandos y clasificarlos
-		client.commands.forEach((e) => {
-			switch (e.path) {
-				case 'test':
-					cmdList[0].cmds.push(e);
-					break;
-				case 'reaction':
-					cmdList[1].cmds.push(e);
-					break;
-				case 'utility':
-					cmdList[2].cmds.push(e);
-					break;
-				case 'moderation':
-					cmdList[3].cmds.push(e);
-					break;
-				case 'fun':
-					cmdList[4].cmds.push(e);
-					break;
-				case 'config':
-					cmdList[5].cmds.push(e);
-					break;
-				case 'bot':
-					cmdList[7].cmds.push(e);
-					break;
+			// Obtener todos los comandos y clasificarlos
+			client.commands.forEach((e) => {
+				switch (e.path) {
+					case 'test':
+						cmdList[0].cmds.push(e);
+						break;
+					case 'reaction':
+						cmdList[1].cmds.push(e);
+						break;
+					case 'utility':
+						cmdList[2].cmds.push(e);
+						break;
+					case 'moderation':
+						cmdList[3].cmds.push(e);
+						break;
+					case 'fun':
+						cmdList[4].cmds.push(e);
+						break;
+					case 'config':
+						cmdList[5].cmds.push(e);
+						break;
+					case 'bot':
+						cmdList[7].cmds.push(e);
+						break;
+				}
+			});
+
+			// Obtener comandos del listado mencionado antes
+			function getCmds(cat: string): string[] {
+				let returnVariable: string[] = [];
+				cmdList
+					.find((e: any) => e.cat == cat)
+					.cmds.forEach((e: any) => {
+							returnVariable.push(e.name);
+					});
+				return returnVariable;
 			}
-		});
 
-		// Obtener comandos del listado mencionado antes
-		function getCmds(cat: string): string[] {
-			let returnVariable: string[] = [];
-			cmdList
-				.find((e: any) => e.cat == cat)
-				.cmds.forEach((e: any) => {
-						returnVariable.push(e.name);
-				});
-			return returnVariable;
-		}
+			// Mostrar mensajes en función de los argumentos
+			if (command == undefined) {
+				// Listado general de comandos
 
-		// Mostrar mensajes en función de los argumentos
-		if (command == undefined) {
-			// Listado general de comandos
-
-			// Embed
-			const embed = new MessageEmbed()
-				.setTitle('😁・Lista de comandos')
-				.setAuthor(msg.author.username, msg.author.avatarURL({ dynamic: true })!)
-				.setDescription(
-					`Hola! soy Normal, un bot multipropósito en español. Estos son todos los comandos que tengo disponible.\nSi deseas que haya un comando nuevo, no dudes en usar el comando \`suggest\`, estaremos encantados de escuchar tus sugerencias`
-				)
-				.addField('😆 Diversión', `\`${getCmds('fun').join('`, `')}\``)
-				.addField(
-					'👋 Reacción',
-					`\`${getCmds('reaction').join('`, `')}\``
-				)
-				.addField(
-					'🔨 Moderación',
-					`\`${getCmds('moderation').join('`, `')}\``
-				)
-				.addField(
-					'📺 Utilidad',
-					`\`${getCmds('utility').join('`, `')}\``
-				)
-				.addField('🍎 Bot', `\`${getCmds('bot').join('`, `')}\``)
-				.addField(
-					'🔧 Configuración',
-					`\`${getCmds('config').join('`, `')}\``
-				)
-				.addField(
-					'💡 Alfa / Beta / Release Candidate (inestable)',
-					`\`${getCmds('test').join('`, `')}\``
-				)
-				.setColor('RANDOM')
-				.setThumbnail(client.user!.avatarURL()!)
-				.setFooter(
-					'Necesitas ayuda con un comando? Prueba `help [comando]`',
-					client.user!.avatarURL()!
-				);
-
-			return msg.reply({ embeds: [embed] });
-		} else {
-			// Información detallada de un comando
-
-			// Obtener comando mediante nombre o alias
-
-			let argCommand = client.commands.find(
-				(e: any) => command == e.name
-			);
-			if (argCommand == undefined)
-				argCommand = client.aliases.find((e: any) =>
-					e.aliases.find((e: any) => command == e)
-				);
-
-			if (argCommand == undefined) {
-				return msgError('No he encontrado ese comando', msg, client);
-
-			} else if (msg.author.id !== config.dev && argCommand.dev == true) {
-				return msgError('No tienes permiso para ver ese comando', msg, client);
-
-			} else {
 				// Embed
 				const embed = new MessageEmbed()
-					.setTitle(`📚・Comando ${argCommand!.name}`)
+					.setTitle('😁・Lista de comandos')
 					.setAuthor(msg.author.username, msg.author.avatarURL({ dynamic: true })!)
-					.addField('Nombre', `\`${argCommand!.name}\``)
-					.addField('Descripción', `${argCommand!.description}`)
+					.setDescription(
+						`Hola! soy Normal, un bot multipropósito en español. Estos son todos los comandos que tengo disponible.\nSi deseas que haya un comando nuevo, no dudes en usar el comando \`suggest\`, estaremos encantados de escuchar tus sugerencias`
+					)
+					.addField('😆 Diversión', `\`${getCmds('fun').join('`, `')}\``)
 					.addField(
-						'Alias',
-						`${
-							argCommand!.aliases?.length == 0
-								? 'Ninguno'
-								: '`' + argCommand!.aliases?.join('`, `') + '`'
-						}`,
-						true
+						'👋 Reacción',
+						`\`${getCmds('reaction').join('`, `')}\``
 					)
 					.addField(
-						'Permisos',
-						`${
-							argCommand!.perms == undefined
-								? 'Ninguno'
-								: '`' + argCommand!.perms + '`'
-						}`,
-						true
+						'🔨 Moderación',
+						`\`${getCmds('moderation').join('`, `')}\``
 					)
 					.addField(
-						'NSFW',
-						`${argCommand!.nsfw == true ? '✅ Sí' : '❎ No'}`,
-						true
+						'📺 Utilidad',
+						`\`${getCmds('utility').join('`, `')}\``
+					)
+					.addField('🍎 Bot', `\`${getCmds('bot').join('`, `')}\``)
+					.addField(
+						'🔧 Configuración',
+						`\`${getCmds('config').join('`, `')}\``
 					)
 					.addField(
-						'Uso',
-						`\`${argCommand!.name} ${argCommand!.usage}\``,
-						false
+						'💡 Alfa / Beta / Release Candidate (inestable)',
+						`\`${getCmds('test').join('`, `')}\``
 					)
-					.addField(
-						'Ejemplo(s)',
-						`${`\`\`\`\n${argCommand!.example[0] == '' ? argCommand!.name : ''
-					} ${
-							argCommand!.example !== undefined
-								? argCommand!.example?.join(
-										`\n${argCommand!.name} `
-								)
-								: ''
-						}\n\`\`\``}`,
-						false
-					)
-					.addField(
-						'En desarrollo',
-						`${
-							argCommand!.indev == undefined
-								? '❎ No'
-								: `✅ Sí (\`${argCommand?.indev}\`)`
-						}`,
-						false
-					)
-					.setColor('RANDOM')
+					.setColor(c.default)
 					.setThumbnail(client.user!.avatarURL()!)
 					.setFooter(
-						'Recuerda: los argumentos `<>` son obligatorios y los `[]` son opcionales',
+						'Necesitas ayuda con un comando? Prueba `help [comando]`',
 						client.user!.avatarURL()!
 					);
 
-				return msg.reply({
-					embeds: [embed],
-					allowedMentions: {
-						repliedUser: false
-					}
-				});
+				return msg.reply({ embeds: [embed] });
+			} else {
+				// Información detallada de un comando
+
+				// Obtener comando mediante nombre o alias
+
+				let argCommand = client.commands.find(
+					(e: any) => command == e.name
+				);
+				if (argCommand == undefined)
+					argCommand = client.aliases.find((e: any) =>
+						e.aliases.find((e: any) => command == e)
+					);
+
+				if (argCommand == undefined) {
+					return msgError('No he encontrado ese comando', msg, client);
+
+				} else if (msg.author.id !== config.dev && argCommand.dev == true) {
+					return msgError('No tienes permiso para ver ese comando', msg, client);
+
+				} else {
+					// Embed
+					const embed = new MessageEmbed()
+						.setTitle(`📚・Comando ${argCommand!.name}`)
+						.addField('Nombre', `\`${argCommand!.name}\``)
+						.addField('Descripción', `${argCommand!.description}`)
+						.addField(
+							'Alias',
+							`${
+								argCommand!.aliases?.length == 0
+									? 'Ninguno'
+									: '`' + argCommand!.aliases?.join('`, `') + '`'
+							}`,
+							true
+						)
+						.addField(
+							'Permisos',
+							`${
+								argCommand!.perms == undefined
+									? 'Ninguno'
+									: '`' + argCommand!.perms + '`'
+							}`,
+							true
+						)
+						.addField(
+							'NSFW',
+							`${argCommand!.nsfw == true ? '✅ Sí' : '❎ No'}`,
+							true
+						)
+						.addField(
+							'Uso',
+							`\`${argCommand!.name} ${argCommand!.usage}\``,
+							false
+						)
+						.addField(
+							'Ejemplo(s)',
+							`${`\`\`\`\n${argCommand!.example[0] == '' ? argCommand!.name : ''
+						} ${
+								argCommand!.example !== undefined
+									? argCommand!.example?.join(
+											`\n${argCommand!.name} `
+									)
+									: ''
+							}\n\`\`\``}`,
+							false
+						)
+						.addField(
+							'En desarrollo',
+							`${
+								argCommand!.indev == undefined
+									? '❎ No'
+									: `✅ Sí (\`${argCommand?.indev}\`)`
+							}`,
+							false
+						)
+						.setColor(c.default)
+						.setThumbnail(client.user!.avatarURL()!)
+						.setFooter(
+							'Recuerda: los argumentos `<>` son obligatorios y los `[]` son opcionales',
+							client.user!.avatarURL()!
+						);
+
+					return msg.reply({
+						embeds: [embed],
+						allowedMentions: {
+							repliedUser: false
+						}
+					});
+				}
 			}
+		} catch (err) {
+			msgCritical(err, msg, client)
 		}
 	}
-};
+}

@@ -58,7 +58,7 @@ function getColor() {
     }*/
     // reservado para otros días que me haya acordado
     else {
-        return '#3B82F6';
+        return '#60A5FA';
     }
     
 }
