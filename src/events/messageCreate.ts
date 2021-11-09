@@ -201,7 +201,7 @@ export const event: Event = {
 							: ''
 						} ${
 							data.example !== undefined
-							? data.example?.join(`\n${data.name} `)
+							? data.name + ' ' + data.example?.join(`\n${data.name} `)
 							: ''
 						}\n\`\`\``}`,
 						false

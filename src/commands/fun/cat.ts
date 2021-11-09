@@ -19,7 +19,7 @@ export const command: Command = {
 		try {
 			// Embed
 			const embed = new MessageEmbed()
-			.setTitle('🐱・Miau?')
+			.setTitle('<a:Nloading:907355201688698951>・Miau?')
 					.setFooter('Cargando...')
 					.setColor(c.default);
 					

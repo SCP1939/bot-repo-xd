@@ -21,7 +21,7 @@ export const command: Command = {
 			const subreddit = args[0];
 			
 			// Reaccion de cargando
-			msg.react('⏳');
+			msg.react('<a:Nloading:907355201688698951>');
 			
 			
 			// Para que este bucle while?
@@ -45,8 +45,8 @@ export const command: Command = {
 					if (t2 - t1 >= 10000) {
 						loop = false;
 						// Eliminar reacción de cargando
-						msg.reactions.cache.get('⏳')?.remove();
-	
+						msg.reactions.removeAll();
+
 						return msgErrorEmoji('Tiempo de espera agotado (`10000 ms.`)', '⌛', msg, client)
 					}
 	
@@ -64,12 +64,12 @@ export const command: Command = {
 				// @ts-ignore
 				if (!msg.channel.nsfw && data.over_18) {
 					// Eliminar reacción de cargando
-					msg.reactions.cache.get('⏳')?.remove();
+					msg.reactions.removeAll();
 					
 					return msgErrorEmoji(`**El subreddit** \`${data.subreddit}\` **tiene contenido no apto para menores.**\n> dirígete a un canal NSFW y vuelve a intentarlo`, '🔞', msg, client)
 				} else {
 					// Eliminar reacción de cargando
-					msg.reactions.cache.get('⏳')?.remove();
+					msg.reactions.removeAll();
 					
 					// Embed
 					const embed = new MessageEmbed()
@@ -82,10 +82,15 @@ export const command: Command = {
 						)
 						.setColor(c.default);
 						
-						return msg.channel.send({ embeds: [embed] });
+						const message = await msg.channel.send({ embeds: [embed] });
+						message.react('<:Upvote:893980350139760700>');
+						message.react('<:Downvote:907355445042216980>');
+						
+
+						return;
 					}
 				} catch (err) {
-					msg.reactions.cache.get('⏳')?.remove();
+					msg.reactions.removeAll();
 					return msgError('No encuentro a ese subreddit', msg, client)
 				}
 		} catch (err) {
