@@ -14,5 +14,8 @@
   "scripts": {
     "start": "node_modules/typescript/bin/tsc && node dist/index.js",
     "dev": "nodemon src/index.ts"
+  },
+  "engines": {
+    "node": ">=17.x"
   }
 }
