@@ -32,7 +32,7 @@ export const command: Command = {
 					.setColor(c.default)
 					.setTimestamp();
 					
-					const message = await msg.reply({ embeds: [embed] });
+					const message = await msg.channel.send({ embeds: [embed] });
 					message.react('<:Upvote:893980350139760700>');
 					message.react('<:Downvote:907355445042216980>');
 
@@ -46,7 +46,7 @@ export const command: Command = {
 					.setColor(c.default) // opts.map(opt => opt.split())
 					.setTimestamp();
 
-				const message = await msg.reply({ embeds: [embed] });
+				const message = await msg.channel.send({ embeds: [embed] });
 
 				for (const opt of opts) {
 					message.react(`${regionalIndicator[opts.indexOf(opt)]}`);
