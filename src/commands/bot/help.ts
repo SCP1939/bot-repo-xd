@@ -170,7 +170,7 @@ export const command: Command = {
 						} ${
 								argCommand!.example !== undefined
 									? argCommand!.example?.join(
-											`\n${argCommand!.name} `
+										argCommand!.name + ' ' + `\n${argCommand!.name} `
 									)
 									: ''
 							}\n\`\`\``}`,

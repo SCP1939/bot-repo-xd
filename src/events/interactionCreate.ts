@@ -11,14 +11,14 @@ export const event: Event = {
 	//@ts-ignore
     run: async (client: any, msg: Message, interaction: CommandInteraction) => {
 		msg.channel.send(`Lo siento pero no soporto slash commands debido a un error. Prueba a escribir \`${config.prefix}ping\` mientras arreglamos el error :)`)
-		/*if(!interaction.isCommand()) return; 
+		if(!interaction.isCommand()) return; 
 		
 		const name = interaction.commandName;
 		const opts = interaction.options;
 		
 		if (name == 'ping') {
 			interaction.reply('pong');
-		}*/
+		}
 		
     }
 }
