@@ -30,8 +30,6 @@ export const event: Event = {
 
 			/***********************/
 
-			// TODO poner embeds en los mensajes
-
 			// if if if if if if if if if if if if
 
 			/*
@@ -201,7 +199,7 @@ export const event: Event = {
 							: ''
 						} ${
 							data.example !== undefined
-							? data.name + ' ' + data.example?.join(`\n${data.name} `)
+							? data.example?.join(`\n${data.name} `)
 							: ''
 						}\n\`\`\``}`,
 						false

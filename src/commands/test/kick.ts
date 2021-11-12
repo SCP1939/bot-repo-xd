@@ -12,6 +12,7 @@ export const command: Command = {
 	usage: '<miembro> [motivo]',
 	example: ['', '@usuario spam', '@usuario', '012345678901234567'],
 
+	disabled: true,
 	args: 1,
 
 	perms: 'kick',
