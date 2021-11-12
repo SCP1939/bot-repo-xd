@@ -56,7 +56,7 @@ export function msgWarn(content: string, msg: Message, client: extClient) {
 	const embed = new MessageEmbed()
 		.setTitle(`<:Nwarn:906291449228820480>・Advertencia`)
 		.setDescription(content)
-		.setColor(c.warn)
+		.setColor(c.warning)
 		.setFooter(
 			`Normal ${version}`,
 			client.user!.avatarURL()!

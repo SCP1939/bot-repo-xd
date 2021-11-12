@@ -7,6 +7,7 @@ import { msgCritical, msgError } from '../../util/msgs';
 // El algoritmo para obtener los comandos lo he improvisado
 // Seguramente sea una mierda pero funciona xd
 
+// FIXME arreglar lo de los ejemplos tanto aqui como en msgCreate (el de msgCreate está menos bug)
 export const command: Command = {
 	name: 'help',
 	description: 'Obtén ayuda de los comandos disponibles o de uno en concreto',
