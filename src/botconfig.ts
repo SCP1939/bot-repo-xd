@@ -63,7 +63,7 @@ function getColor() {
     
 }
 export const config = {
-    prefix: 'a.',
+    prefix: 'n.',
     dev: '685947556655923242',
     mongo: process.env.MONGO_URI,
     token: process.env.TOKEN,
