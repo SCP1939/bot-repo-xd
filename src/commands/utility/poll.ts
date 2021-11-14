@@ -20,12 +20,13 @@ export const command: Command = {
 	example: ['Normal es buen bot?', 'Que fruta prefieres?, Manzana, Naranja, Kiwi'],
 
 	run: async (client: extClient, msg: Message, args: string[]) => {
+		const arg = args.join(' ').split(',');
+		const question = arg[0];
+		const opts = arg.slice(1)
 		try {
-			const arg = args.join(' ').split(',');
-			const question = arg[0];
-			const opts = arg.slice(1)
+			msg.delete();
 
-			if (opts.length < 1) {
+			if (opts.length < 2) {
 				const embed = new MessageEmbed()
 					.setTitle('📊・Encuesta')
 					.setDescription(`> ${question}`)
