@@ -4,11 +4,10 @@ import extClient from '../../client';
 
 import { config, color as c } from '../../botconfig';
 import { msgCritical, msgError } from '../../util/msgs';
+import sleep from '../../util/sleep';
 
-let abc = 'abcdefghijklmnopqrstuvwxyz';
 let regionalIndicator = '🇦 🇧 🇨 🇩 🇪 🇫 🇬 🇭 🇮 🇯 🇰 🇱 🇲 🇳 🇴 🇵 🇶 🇷 🇸 🇹 🇺 🇻 🇼 🇽 🇾 🇿'.split(' ');
 
-// let regionalIndicator: string[] = abc.split('').map(letter => `regional_indicator_${letter}`);
 
 export const command: Command = {
 	name: 'poll',
@@ -24,9 +23,10 @@ export const command: Command = {
 		const question = arg[0];
 		const opts = arg.slice(1)
 		try {
-			msg.delete();
-
+			
 			if (opts.length < 2) {
+				msg.delete();
+
 				const embed = new MessageEmbed()
 					.setTitle('📊・Encuesta')
 					.setDescription(`> ${question}`)
@@ -41,9 +41,11 @@ export const command: Command = {
 			} else if (opts.length > 20) {
 				return msgError('Solo puedes poner 20 opciones máximo', msg, client);
 			} else {
+				msg.delete();
+
 				const embed = new MessageEmbed()
 					.setTitle('📊・Encuesta')
-					.setDescription(`> ${question}${opts.map( opt => '\n' + regionalIndicator[opts.indexOf(opt)] + '**:** ' + opt).toString().replaceAll(',', '')}`)
+					.setDescription(`> ${question}${opts.map( opt => '\n' + regionalIndicator[opts.indexOf(opt)] + ' ' + opt).toString().replaceAll(',', '')}`)
 					.setColor(c.default) // opts.map(opt => opt.split())
 					.setTimestamp();
 

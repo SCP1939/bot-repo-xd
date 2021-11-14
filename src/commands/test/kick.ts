@@ -34,7 +34,7 @@ export const command: Command = {
 				
 				const reason = args.slice(1).join(' ') || 'Sin motivo';
 				
-				await user.kick(`-Mod: ${msg.author.tag}\n- Motivo: ${reason}`);
+				//await user.kick(`-Mod: ${msg.author.tag}\n- Motivo: ${reason}`);
 
 				// md
 				const embedDM = new MessageEmbed()
@@ -46,18 +46,24 @@ export const command: Command = {
 					.setFooter(msg.author.username, msg.author.avatarURL()!)
 					.setTimestamp();
 
-					user.send({ embeds: [embedDM] });
-				// server
-				const embed = new MessageEmbed()
-					.setTitle(`✈️・${user.user.username} expulsado`)
-					.addField('Moderador responsable: ', msg.author.toString(), false)
-					.addField('Motivo: ', `\`${reason}\``, false)
-					.setColor(c.default)
-					.setThumbnail(user.user.avatarURL({ dynamic: true })!)
-					.setFooter(msg.author.username, msg.author.avatarURL()!)
-					.setTimestamp();
+					// server
+					const embed = new MessageEmbed()
+						.setTitle(`✈️・${user.user.username} expulsado`)
+						.addField('Moderador responsable: ', msg.author.toString(), false)
+						.addField('Motivo: ', `\`${reason}\``, false)
+						.setColor(c.default)
+						.setThumbnail(user.user.avatarURL({ dynamic: true })!)
+						.setFooter(msg.author.username, msg.author.avatarURL()!)
+						.setTimestamp();
+						
+						let axd = {pos: 0, role: ''}
+					msg.guild?.roles.cache.map(e => axd = {pos: e.position, role: e.name}).sort((a: any, b: any) => a.pos - b.pos).join('\n')
 					
-					return msg.reply({ embeds: [embed] });
+
+						msg.reply({ embeds: [embed] });
+						user.send({ embeds: [embedDM] }).catch(() => {msg.channel.send(`${user.user.username} no pudo recibir el mensaje de expulsión`)});
+
+					return;
 			} catch (err) {
 				return msgError('No he encontrado a ese miembro', msg, client);
 			}
