@@ -14,7 +14,7 @@ export const command: Command = {
 
 	run: async (client: extClient, msg: Message, args: string[]) => {
 		try {
-			const cmd = msg.content.slice(config.prefix.length).trim().split(/ +/g).shift()?.toLowerCase(); // Obtener comando
+			const cmd = msg.content.slice(config.prefix!.length).trim().split(/ +/g).shift()?.toLowerCase(); // Obtener comando
 			let t1 = +new Date();
 
 			const embed = new MessageEmbed()
