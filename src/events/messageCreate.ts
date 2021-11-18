@@ -13,7 +13,7 @@ export const event: Event = {
 			if (
 				msg.author.bot ||
 				msg.webhookId ||
-				!msg.content.startsWith(config.prefix)
+				!msg.content.startsWith(config.prefix!)
 			)
 			return;
 
@@ -21,7 +21,7 @@ export const event: Event = {
 
 			// Definir argumentos y eso
 			const args = msg.content
-				.slice(config.prefix.length)
+				.slice(config.prefix!.length)
 				.trim()
 				.split(/ +/g); // Dividir argumentos
 			const cmd = args.shift()?.toLowerCase(); // Obtener comando
