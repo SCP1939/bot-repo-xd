@@ -47,10 +47,10 @@ function getColor() {
     else if (day == 14 && month == 2 ) {
         return '#F472B6'; // San valentin
     }
-    /*else if (day ==  && month ==  ) {
-        return '';
+    else if (day == 29 && month == 11 ) {
+        return '#000000'; // test
     }
-    else if (day ==  && month ==  ) {
+    /*else if (day ==  && month ==  ) {
         return '';
     }
     else if (day ==  && month ==  ) {
