@@ -62,6 +62,11 @@ function getColor() {
     }
     
 }
+
+// Test
+console.log('fecha: ' + new Date().getUTCDay() + '/' + new Date().getUTCMonth())
+console.log('color: ' + getColor())
+
 export const config = {
     prefix: process.env.PREFIX,
     dev: '685947556655923242',
