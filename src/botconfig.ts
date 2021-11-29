@@ -64,7 +64,7 @@ function getColor() {
 }
 
 // Test
-console.log('fecha: ' + new Date().getUTCDay() + '/' + new Date().getUTCMonth())
+console.log('fecha: ' + new Date().getDay() + '/' + new Date().getMonth())
 console.log('color: ' + getColor())
 
 export const config = {
