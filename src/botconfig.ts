@@ -5,7 +5,7 @@ dotenv.config();
 // el color principal cambiará si es un día especial
 function getColor() {
     const date = new Date();
-    const day = date.getUTCDay();
+    const day = date.getUTCDate();
     const month = date.getUTCMonth() + 1;
 
     if (day == 1 && month == 1 ) {
@@ -64,7 +64,7 @@ function getColor() {
 }
 
 // Test
-console.log('fecha: ' + new Date().getDay() + '/' + new Date().getMonth())
+console.log('fecha: ' + new Date().getUTCDate() + '/' + (new Date().getMonth() + 1))
 console.log('color: ' + getColor())
 
 export const config = {
