@@ -6,7 +6,7 @@ dotenv.config();
 function getColor() {
     const date = new Date();
     const day = date.getUTCDay();
-    const month = date.getUTCMonth();
+    const month = date.getUTCMonth() + 1;
 
     if (day == 1 && month == 1 ) {
         return '#F59E0B'; // Año nuevo
