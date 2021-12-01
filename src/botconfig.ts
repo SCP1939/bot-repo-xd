@@ -8,7 +8,7 @@ function getColor() {
     const day = date.getUTCDate();
     const month = date.getUTCMonth() + 1;
 
-    if (day == 1 && month == 1 ) {
+    if ((day == 1 && month == 1) || (day == 31 && month == 12)) {
         return '#F59E0B'; // Año nuevo
     }
     else if (day == 8 && month == 3 ) {
@@ -17,8 +17,8 @@ function getColor() {
     else if (day == 19 && month == 10 ) {
         return '#F9A8D4'; // dia del cancer de mama
     }
-    else if ((month == 11 && day > 25) || (month == 12 && day <= 25)) {
-        return '#15803D'; // Navidad
+    else if ((month == 11 && day > 25) || (month == 12 && day <= 30) || (month == 1 && (day > 1 && day <= 8)) {
+        return '#10B981'; // Navidad
     }
     else if (day == 31 && month == 10 ) {
         return '#EA580C'; // Halloween
