@@ -17,7 +17,7 @@ function getColor() {
     else if (day == 19 && month == 10 ) {
         return '#F9A8D4'; // dia del cancer de mama
     }
-    else if ((month == 11 && day > 25) || (month == 12 && day <= 30) || (month == 1 && (day > 1 && day <= 8)) {
+    else if ((month == 11 && day > 25) || (month == 12 && day <= 30) || (month == 1 && (day > 1 && day <= 8))) {
         return '#10B981'; // Navidad
     }
     else if (day == 31 && month == 10 ) {
