@@ -44,14 +44,18 @@ export const command: Command = {
 				msg.delete();
 
 				const embed = new MessageEmbed()
-					.setTitle('📊・Encuesta')
-					.setDescription(`> ${question}${opts.map( opt => '\n' + regionalIndicator[opts.indexOf(opt)] + ' ' + opt).toString().replaceAll(',', '')}`)
+					.setTitle(`📊・Encuesta de ${msg.author.username}`)
+					.setDescription(`> ${question}${
+						opts.map( opt => {
+							'\n' + regionalIndicator[opts.indexOf(opt)] + ' ' + opt.toString().replaceAll(',', '');
+						})
+					}`)
 					.setColor(c.default) // opts.map(opt => opt.split())
 					.setTimestamp();
 
 				const message = await msg.channel.send({ embeds: [embed] });
 
-				for (const opt of opts) {
+				for (const opt in opts) {
 					message.react(`${regionalIndicator[opts.indexOf(opt)]}`);
 				}
 			}

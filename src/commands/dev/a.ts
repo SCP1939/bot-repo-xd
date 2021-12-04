@@ -9,11 +9,17 @@ export const command: Command = {
 	example: [''],
 
 	aliases: ['pako'],
-	disabled: true,
+	disabled: false,
 
 	dev: true,
 
 	run: async (client: extClient, msg: Message, args: string[]) => {
-        return msg.reply('pacopacopacopacoxd')
+		try {
+			const em = client.emojis.cache.get(args[0])
+			return msg.reply(`${em} existe`)
+		} catch (err) {
+			return msg.reply(`el emoji NO existe`)
+
+		}
     }
 }

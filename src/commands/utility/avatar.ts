@@ -25,7 +25,7 @@ export const command: Command = {
 	description: 'Muestra tu avatar o el de un usuario',
 	aliases: ['av'],
 	usage: '[usuario / ID]',
-	example: ['', '@Normal', '698569950651873299'],
+	example: ['', '@Normal', '698568850651873299'],
 
 	run: async (client: extClient, msg: Message, args: string[]) => {
 		try {
