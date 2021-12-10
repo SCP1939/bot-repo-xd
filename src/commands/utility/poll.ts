@@ -45,17 +45,13 @@ export const command: Command = {
 
 				const embed = new MessageEmbed()
 					.setTitle(`📊・Encuesta de ${msg.author.username}`)
-					.setDescription(`> ${question}${
-						opts.map( opt => {
-							'\n' + regionalIndicator[opts.indexOf(opt)] + ' ' + opt.toString().replaceAll(',', '');
-						})
-					}`)
+					.setDescription(`> ${question}${opts.map( opt => '\n' + regionalIndicator[opts.indexOf(opt)] + ' ' + opt).toString().replaceAll(',', '')}`)
 					.setColor(c.default) // opts.map(opt => opt.split())
 					.setTimestamp();
 
 				const message = await msg.channel.send({ embeds: [embed] });
 
-				for (const opt in opts) {
+				for (const opt of opts) {
 					message.react(`${regionalIndicator[opts.indexOf(opt)]}`);
 				}
 			}
